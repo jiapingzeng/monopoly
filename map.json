@@ -1,0 +1,196 @@
+{
+  "places": [
+    {
+      "name": "GO",
+      "type": "go"
+    },
+    {
+      "name": "Gdynia",
+      "type": "city",
+      "price": 6000000
+    },
+    {
+      "name": "Community Chest",
+      "type": "chest"
+    },
+    {
+      "name": "Taipei",
+      "type": "city",
+      "price": 600000
+    },
+    {
+      "name": "Income Tax",
+      "type": "tax",
+      "amount": 2000000
+    },
+    {
+      "name": "Monopoly Rail",
+      "type": "transport",
+      "price": 2000000
+    },
+    {
+      "name": "Tokyo",
+      "type": "city",
+      "price": 1000000
+    },
+    {
+      "name": "Chance",
+      "type": "chance"
+    },
+    {
+      "name": "Barcelona",
+      "type": "city",
+      "price": 1000000
+    },
+    {
+      "name": "Athens",
+      "type": "city",
+      "price": 1200000
+    },
+    {
+      "name": "Jail",
+      "type": "jail"
+    },
+    {
+      "name": "Istanbul",
+      "type": "city",
+      "price": 1400000
+    },
+    {
+      "name": "Solar Energy",
+      "type": "utility",
+      "price": 1500000
+    },
+    {
+      "name": "Kyiv",
+      "type": "city",
+      "price": 1400000
+    },
+    {
+      "name": "Toronto",
+      "type": "city",
+      "price": 1600000
+    },
+    {
+      "name": "Monopoly Air",
+      "type": "transport",
+      "price": 2000000
+    },
+    {
+      "name": "Rome",
+      "type": "city",
+      "price": 1800000
+    },
+    {
+      "name": "Community Chest",
+      "type": "chest"
+    },
+    {
+      "name": "Shanghai",
+      "type": "city",
+      "price": 1800000
+    },
+    {
+      "name": "Vancouver",
+      "type": "city",
+      "price": 2000000
+    },
+    {
+      "name": "Free Parking",
+      "type": "parking"
+    },
+    {
+      "name": "Sydney",
+      "type": "city",
+      "price": 2200000
+    },
+    {
+      "name": "Chance",
+      "type": "chance"
+    },
+    {
+      "name": "New York",
+      "type": "city",
+      "price": 2200000
+    },
+    {
+      "name": "London",
+      "type": "city",
+      "price": 2400000
+    },
+    {
+      "name": "Monopoly Cruise",
+      "type": "transport",
+      "price": 2000000
+    },
+    {
+      "name": "Beijing",
+      "type": "city",
+      "price": 2600000
+    },
+    {
+      "name": "Hong Kong",
+      "type": "city",
+      "price": 2600000
+    },
+    {
+      "name": "Wind Energy",
+      "type": "utility",
+      "price": 1500000
+    },
+    {
+      "name": "Jerusalem",
+      "type": "city",
+      "price": 2800000
+    },
+    {
+      "name": "Go to Jail",
+      "type": "teleport"
+    },
+    {
+      "name": "Paris",
+      "type": "city",
+      "price": 3000000
+    },
+    {
+      "name": "Belgrade",
+      "type": "city",
+      "price": 3000000
+    },
+    {
+      "name": "Community Chest",
+      "type": "chest"
+    },
+    {
+      "name": "Cape Town",
+      "type": "city",
+      "price": 3200000
+    },
+    {
+      "name": "Monopoly Space",
+      "type": "transport",
+      "price": 2000000
+    },
+    {
+      "name": "Chance",
+      "type": "chance"
+    },
+    {
+      "name": "Riga",
+      "type": "city",
+      "price": 3500000
+    },
+    {
+      "name": "Super Tax",
+      "type": "tax",
+      "amount": 1000000
+    },
+    {
+      "name": "Montreal",
+      "type": "city",
+      "price": 4000000
+    }
+  ],
+  "chance": [],
+  "chest": []
+}
