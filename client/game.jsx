@@ -1,5 +1,6 @@
 import React from 'react'
 import io from 'socket.io-client'
+import Grid from 'material-ui/Grid'
 
 import Board from './board.jsx'
 
@@ -9,9 +10,16 @@ export default class Game extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            username: '',
-            gameMap: []
+            textBox: '',
+            hasUsername: false,
+            gameMap: [],
+            messages: []
         }
+    }
+
+    addMessage(message) {
+        var messages = this.state.messages
+        this.setState({ messages: messages.concat([message]) })
     }
 
     componentDidMount() {
@@ -24,22 +32,39 @@ export default class Game extends React.Component {
             this.setState({ gameMap: data.places })
             console.log(this.state.gameMap)
         })
+        socket.on('message added', (data) => {
+            console.log(data.message)
+            this.addMessage(`${data.sender}: ${data.message}`)
+        })
     }
 
     handleChange(event) {
         // TODO: form validation
-        this.setState({ username: event.target.value })
+        this.setState({ textBox: event.target.value })
     }
 
     handleSubmit(event) {
-        console.log(this.state.username)
-        socket.emit('set username', this.state.username)
-        socket.emit('start game')
         event.preventDefault()
+        if (this.state.textBox) {
+            console.log(this.state.textBox)
+            if (this.state.hasUsername) {
+                const message = this.state.textBox
+                socket.emit('add message', { type: 'global', message: message })
+                this.setState({ textBox: '' })
+            } else {
+                socket.emit('set username', this.state.textBox)
+                // TODO: check if setting was successful
+                this.setState({ textBox: '' })
+                this.setState({ hasUsername: true })
+                socket.emit('start game')
+            }
+        }
     }
 
     render() {
         const gameMap = this.state.gameMap
+        const messages = this.state.messages
+        const hasUsername = this.state.hasUsername
         let board
         if (gameMap.length > 0) {
             board = (
@@ -48,21 +73,29 @@ export default class Game extends React.Component {
         } else {
             board = (
                 <div>
-                    <h1>Start game</h1>
-                    <form onSubmit={(e) => this.handleSubmit(e)}>
-                        <label>
-                            Username:
-                            <input type='text' value={this.state.username} onChange={(e) => this.handleChange(e)} />
-                        </label>
-                        <input type='submit' />
-                    </form>
+                    <h1>Welcome!</h1>
                 </div>
             )
         }
         return (
             <div className='game'>
-                <h1>TEST</h1>
-                <div>{board}</div>
+                <h1>MONOPOLY</h1>
+                <Grid container>
+                    <Grid item xs={9}>{board}</Grid>
+                    <Grid item xs={2} className='chat'>
+                        <h1>Chat</h1>
+                        <form onSubmit={(e) => this.handleSubmit(e)}>
+                            <label>{hasUsername ? 'Send message: ' : 'Set username: '}</label>
+                            <input type='text' value={this.state.textBox} onChange={(e) => this.handleChange(e)} />
+                            <input type='submit' value={this.state.hasUsername ? 'Send' : 'Submit'} />
+                        </form>
+                        <ul>
+                            {messages.map((item, index) => (
+                                <li key={index}>{item}</li>
+                            ))}
+                        </ul>
+                    </Grid>
+                </Grid>
             </div>
         )
     }
