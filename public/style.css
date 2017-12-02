@@ -2,17 +2,14 @@ body {
     font-family: 'Roboto';
 }
 
+.board {
+    position: relative;
+}
+
 .card {
-    width: 80%;
-    margin: 10px;
-    padding: 20px;
-}
-
-.chat {
-    margin: 10px;
-    border-left: 5px solid black;
-}
-
-.chat * {
-    margin: 10px;
+    border: 1px solid black;
+    display: inline-block;
+    width: 7.6%;
+    height: 7.6%;
+    font-size: 0.3vw;
 }

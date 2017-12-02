@@ -1,8 +1,8 @@
 import React from 'react'
 import io from 'socket.io-client'
-import Grid from 'material-ui/Grid'
 
 import Board from './board.jsx'
+import Chat from './chat.jsx'
 
 let socket
 
@@ -80,22 +80,18 @@ export default class Game extends React.Component {
         return (
             <div className='game'>
                 <h1>MONOPOLY</h1>
-                <Grid container>
-                    <Grid item xs={9}>{board}</Grid>
-                    <Grid item xs={2} className='chat'>
+                <div>
+                    <div xs={12}>{board}</div>
+                    <div>
                         <h1>Chat</h1>
                         <form onSubmit={(e) => this.handleSubmit(e)}>
                             <label>{hasUsername ? 'Send message: ' : 'Set username: '}</label>
                             <input type='text' value={this.state.textBox} onChange={(e) => this.handleChange(e)} />
                             <input type='submit' value={this.state.hasUsername ? 'Send' : 'Submit'} />
                         </form>
-                        <ul>
-                            {messages.map((item, index) => (
-                                <li key={index}>{item}</li>
-                            ))}
-                        </ul>
-                    </Grid>
-                </Grid>
+                        <Chat messages={messages} />
+                    </div>
+                </div>
             </div>
         )
     }
