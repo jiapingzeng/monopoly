@@ -94,7 +94,7 @@ export default class Board extends React.Component {
         }
         return (
             <div style={boardStyle} className={`board rotate-${rotate}`}>
-                <div style={centerStyle} className='block center-block'>
+                <div style={centerStyle} className={`block center-block rotate-${360 - rotate}`}>
                     <button onClick={() => this.handleClick()}>Rotate</button>
                 </div>
                 {this.renderCorners(2 * a)}

@@ -29426,7 +29426,7 @@ var Board = function (_React$Component) {
                 { style: boardStyle, className: 'board rotate-' + rotate },
                 _react2.default.createElement(
                     'div',
-                    { style: centerStyle, className: 'block center-block' },
+                    { style: centerStyle, className: 'block center-block rotate-' + (360 - rotate) },
                     _react2.default.createElement(
                         'button',
                         { onClick: function onClick() {
