@@ -4,12 +4,141 @@ body {
 
 .board {
     position: relative;
+    outline: 2px solid black;
+    font-size: 0px;
+    margin: auto;
+    padding: 0px;    
 }
 
-.card {
-    border: 1px solid black;
+.block-container {
+    position: absolute;
+}
+
+.block {
+    position: absolute;
+    margin: 0px;
+    padding: 0px;
+    outline: 1px solid black;
     display: inline-block;
-    width: 7.6%;
-    height: 7.6%;
-    font-size: 0.3vw;
+    font-size: 10px;
+    text-align: center;
+}
+
+    .block * {
+        margin: 0px;
+        padding: 0px;
+    }
+
+.block-text {
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+}
+
+.center-block {
+    font-size: 30px;
+    vertical-align: middle;
+}
+
+.corner {
+    font-size: 15px;
+    vertical-align: middle;
+}
+
+.top {
+    top: 0px;
+}
+
+.left {
+    left: 0px;
+}
+
+.bottom {
+    bottom: 0px;
+}
+
+.right {
+    right: 0px;
+}
+
+.top-container {
+    -webkit-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+
+.left-container {
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    transform: rotate(90deg);
+}
+
+.right-container {
+    -webkit-transform: rotate(-90deg);
+    -moz-transform: rotate(-90deg);
+    -o-transform: rotate(-90deg);
+    -ms-transform: rotate(-90deg);
+    transform: rotate(-90deg);
+}
+
+.corner-tl * {
+    -webkit-transform: rotate(135deg);
+    -moz-transform: rotate(135deg);
+    -o-transform: rotate(135deg);
+    -ms-transform: rotate(135deg);
+    transform: rotate(135deg);
+}
+
+.corner-tr * {
+    -webkit-transform: rotate(-135deg);
+    -moz-transform: rotate(-135deg);
+    -o-transform: rotate(-135deg);
+    -ms-transform: rotate(-135deg);
+    transform: rotate(-135deg);
+}
+
+.corner-bl * {
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+.corner-br * {
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+}
+
+.rotate-90 {
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    transform: rotate(90deg);
+}
+
+.rotate-180 {
+    -webkit-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+
+.rotate-270 {
+    -webkit-transform: rotate(270deg);
+    -moz-transform: rotate(270deg);
+    -o-transform: rotate(270deg);
+    -ms-transform: rotate(270deg);
+    transform: rotate(270deg);
 }

@@ -81,7 +81,7 @@ export default class Game extends React.Component {
             <div className='game'>
                 <h1>MONOPOLY</h1>
                 <div>
-                    <div xs={12}>{board}</div>
+                    <div>{board}</div>
                     <div>
                         <h1>Chat</h1>
                         <form onSubmit={(e) => this.handleSubmit(e)}>
