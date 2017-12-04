@@ -56,7 +56,7 @@ export default function attachSockets(io) {
                     socketRooms.set(roomId, updatedRoom)
                     socket.emit('room joined', updatedRoom)
                     socket.broadcast.to(roomId).emit('user joined', updatedRoom)
-                    sendSystemMessage(`${socket.id} has joined the room.`, roomId)
+                    sendSystemMessage(`${username} has joined the room.`, roomId)
                 }
             } else {
                 var room = { users: [username] }
