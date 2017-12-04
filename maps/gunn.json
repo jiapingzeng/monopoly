@@ -1,0 +1,213 @@
+{
+  "name":  "Gunn Edition",
+  "places": [
+    {
+      "name": "Weekend",
+      "type": "go"
+    },
+    {
+      "name": "Chris Johnson",
+      "type": "city",
+      "price": 600000
+    },
+    {
+      "name": "Community Chest",
+      "type": "chest"
+    },
+    {
+      "name": "Diane Gleason",
+      "type": "city",
+      "price": 600000
+    },
+    {
+      "name": "Double Flex Time",
+      "type": "tax",
+      "amount": 2000000
+    },
+    {
+      "name": "Monopoly Rail",
+      "type": "transport",
+      "price": 2000000
+    },
+    {
+      "name": "Jordan King",
+      "type": "city",
+      "price": 1000000
+    },
+    {
+      "name": "Chance",
+      "type": "chance"
+    },
+    {
+      "name": "Chris Karas",
+      "type": "city",
+      "price": 1000000
+    },
+    {
+      "name": "Marcel Losier",
+      "type": "city",
+      "price": 1200000
+    },
+    {
+      "name": "Thursday School",
+      "type": "jail"
+    },
+    {
+      "name": "Anne Dumontier",
+      "type": "city",
+      "price": 1400000
+    },
+    {
+      "name": "Steven Ames",
+      "type": "utility",
+      "price": 1500000
+    },
+    {
+      "name": "Mark Gleason",
+      "type": "city",
+      "price": 1400000
+    },
+    {
+      "name": "Josh Paley",
+      "type": "city",
+      "price": 1600000
+    },
+    {
+      "name": "Monopoly Air",
+      "type": "transport",
+      "price": 2000000
+    },
+    {
+      "name": "Derek Yee",
+      "type": "city",
+      "price": 1800000
+    },
+    {
+      "name": "Community Chest",
+      "type": "chest"
+    },
+    {
+      "name": "Ellen Feigenbaum",
+      "type": "city",
+      "price": 1800000
+    },
+    {
+      "name": "Lynne Navarro",
+      "type": "city",
+      "price": 2000000
+    },
+    {
+      "name": "Prep",
+      "type": "parking"
+    },
+    {
+      "name": "Heather Mellows",
+      "type": "city",
+      "price": 2200000
+    },
+    {
+      "name": "Chance",
+      "type": "chance"
+    },
+    {
+      "name": "Ellen Feigenbaum",
+      "type": "city",
+      "price": 2200000
+    },
+    {
+      "name": "Dave Deggeller",
+      "type": "city",
+      "price": 2400000
+    },
+    {
+      "name": "Monopoly Cruise",
+      "type": "transport",
+      "price": 2000000
+    },
+    {
+      "name": "Diane Ichikawa",
+      "type": "city",
+      "price": 2600000
+    },
+    {
+      "name": "Maria Powell",
+      "type": "city",
+      "price": 2600000
+    },
+    {
+      "name": "Wind Energy",
+      "type": "utility",
+      "price": 1500000
+    },
+    {
+      "name": "Julie Munger",
+      "type": "city",
+      "price": 2800000
+    },
+    {
+      "name": "Go to Thursday School",
+      "type": "teleport"
+    },
+    {
+      "name": "Kathy Hawes",
+      "type": "city",
+      "price": 3000000
+    },
+    {
+      "name": "Belgrade",
+      "type": "city",
+      "price": 3000000
+    },
+    {
+      "name": "Community Chest",
+      "type": "chest"
+    },
+    {
+      "name": "Casey O'Connell",
+      "type": "city",
+      "price": 3200000
+    },
+    {
+      "name": "Monopoly Space",
+      "type": "transport",
+      "price": 2000000
+    },
+    {
+      "name": "Chance",
+      "type": "chance"
+    },
+    {
+      "name": "Bill Dunbar",
+      "type": "city",
+      "price": 3500000
+    },
+    {
+      "name": "Flex Time",
+      "type": "tax",
+      "amount": 1000000
+    },
+    {
+      "name": "Keith Ledgerwood",
+      "type": "city",
+      "price": 4000000
+    }
+  ],
+  "chance": [
+    {
+      "name": "Fire drill"
+    },
+    {
+      "name": "New bell schedule"
+    },
+    {
+      "name": "SELF required for all grade"
+    },
+    {
+      "name": "Construction"
+    },
+    {
+      "name": "Staff development day"
+    }
+  ],
+  "chest": []
+}

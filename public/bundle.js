@@ -26020,6 +26020,10 @@ var _chat = __webpack_require__(317);
 
 var _chat2 = _interopRequireDefault(_chat);
 
+var _lobby = __webpack_require__(318);
+
+var _lobby2 = _interopRequireDefault(_lobby);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -26041,6 +26045,7 @@ var Game = function (_React$Component) {
         _this.state = {
             textBox: '',
             hasUsername: false,
+            isInGame: false,
             gameMap: [],
             messages: []
         };
@@ -26049,9 +26054,9 @@ var Game = function (_React$Component) {
 
     _createClass(Game, [{
         key: 'addMessage',
-        value: function addMessage(message) {
+        value: function addMessage(message, color) {
             var messages = this.state.messages;
-            this.setState({ messages: messages.concat([message]) });
+            this.setState({ messages: messages.concat([{ text: message, color: color ? color : 'black' }]) });
         }
     }, {
         key: 'componentDidMount',
@@ -26068,8 +26073,15 @@ var Game = function (_React$Component) {
                 console.log(_this2.state.gameMap);
             });
             socket.on('message added', function (data) {
-                console.log(data.message);
-                _this2.addMessage(data.sender + ': ' + data.message);
+                _this2.addMessage(data.sender + ': ' + data.text, data.color);
+            });
+            socket.on('room joined', function (data) {
+                console.log(data);
+                _this2.setState({ isInGame: true });
+                socket.emit('start game', { mapName: 'gunn' });
+            });
+            socket.on('user joined', function (data) {
+                console.log(data);
             });
         }
     }, {
@@ -26086,14 +26098,13 @@ var Game = function (_React$Component) {
                 console.log(this.state.textBox);
                 if (this.state.hasUsername) {
                     var message = this.state.textBox;
-                    socket.emit('add message', { type: 'global', message: message });
+                    socket.emit('add message', { type: 'global', text: message });
                     this.setState({ textBox: '' });
                 } else {
                     socket.emit('set username', this.state.textBox);
                     // TODO: check if setting was successful
                     this.setState({ textBox: '' });
                     this.setState({ hasUsername: true });
-                    socket.emit('start game');
                 }
             }
         }
@@ -26105,6 +26116,8 @@ var Game = function (_React$Component) {
             var gameMap = this.state.gameMap;
             var messages = this.state.messages;
             var hasUsername = this.state.hasUsername;
+            var isInGame = this.state.isInGame;
+
             var board = void 0;
             if (gameMap.length > 0) {
                 board = _react2.default.createElement(_board2.default, { gameMap: gameMap });
@@ -26116,9 +26129,25 @@ var Game = function (_React$Component) {
                         'h1',
                         null,
                         'Welcome!'
+                    ),
+                    _react2.default.createElement(
+                        'h3',
+                        null,
+                        'Start by creating a username on the right side of the page ->'
                     )
                 );
             }
+            var lobby = void 0;
+            if (hasUsername && !isInGame) {
+                lobby = _react2.default.createElement(_lobby2.default, { socket: socket });
+            }
+            var chatStyle = {
+                width: 400 + 'px',
+                height: window.innerHeight * 0.8 + 'px',
+                position: 'fixed',
+                right: 0,
+                outline: '3px solid black'
+            };
             return _react2.default.createElement(
                 'div',
                 { className: 'game' },
@@ -26132,16 +26161,11 @@ var Game = function (_React$Component) {
                     null,
                     _react2.default.createElement(
                         'div',
-                        null,
-                        board
-                    ),
-                    _react2.default.createElement(
-                        'div',
-                        null,
+                        { style: chatStyle },
                         _react2.default.createElement(
                             'h1',
                             null,
-                            'Chat'
+                            'Lobby'
                         ),
                         _react2.default.createElement(
                             'form',
@@ -26158,7 +26182,17 @@ var Game = function (_React$Component) {
                                 } }),
                             _react2.default.createElement('input', { type: 'submit', value: this.state.hasUsername ? 'Send' : 'Submit' })
                         ),
-                        _react2.default.createElement(_chat2.default, { messages: messages })
+                        _react2.default.createElement(_chat2.default, { messages: messages }),
+                        _react2.default.createElement(
+                            'div',
+                            null,
+                            lobby
+                        )
+                    ),
+                    _react2.default.createElement(
+                        'div',
+                        null,
+                        board
                     )
                 )
             );
@@ -29307,8 +29341,7 @@ var Board = function (_React$Component) {
             var gameMap = this.props.gameMap;
             var style = {
                 width: width + 'px',
-                height: width + 'px',
-                lineHeight: width + 'px'
+                height: width + 'px'
             };
             return _react2.default.createElement(
                 'div',
@@ -29319,7 +29352,7 @@ var Board = function (_React$Component) {
                     _react2.default.createElement(
                         'h3',
                         null,
-                        gameMap[30].name
+                        gameMap[20].name
                     )
                 ),
                 _react2.default.createElement(
@@ -29328,7 +29361,7 @@ var Board = function (_React$Component) {
                     _react2.default.createElement(
                         'h3',
                         null,
-                        gameMap[20].name
+                        gameMap[30].name
                     )
                 ),
                 _react2.default.createElement(
@@ -29376,13 +29409,13 @@ var Board = function (_React$Component) {
                     { key: side + '-' + i, style: blockStyle, className: 'block ' + side + ' ' + side + '-' + i },
                     _react2.default.createElement(
                         'h3',
-                        { className: 'block-text top' },
+                        { style: { top: length / 10 + 'px' }, className: 'block-text' },
                         item.name
                     ),
                     _react2.default.createElement(
                         'h4',
-                        { className: 'block-text bottom' },
-                        '' + (item.price ? item.price : '')
+                        { style: { bottom: length / 10 + 'px' }, className: 'block-text' },
+                        '' + (item.price ? this.abbreviateNumber(item.price) : '')
                     )
                 ));
             }
@@ -29391,6 +29424,17 @@ var Board = function (_React$Component) {
                 { style: style, className: 'block-container ' + side + ' ' + side + '-container' },
                 blocks
             );
+        }
+    }, {
+        key: 'abbreviateNumber',
+        value: function abbreviateNumber(value) {
+            var suffixes = ["", "k", "m", "b", "t"];
+            var suffixNum = Math.floor(("" + value).length / 3);
+            var shortValue = parseFloat((suffixNum != 0 ? value / Math.pow(1000, suffixNum) : value).toPrecision(2));
+            if (shortValue % 1 != 0) {
+                var shortNum = shortValue.toFixed(1);
+            }
+            return shortValue + suffixes[suffixNum];
         }
     }, {
         key: 'handleClick',
@@ -29408,7 +29452,7 @@ var Board = function (_React$Component) {
             var _this2 = this;
 
             var gameMap = this.props.gameMap;
-            var a = window.innerHeight * 0.8 / 13;
+            var a = window.innerHeight * 0.9 / 13;
             var rotate = this.state.rotate;
             var boardStyle = {
                 width: 13 * a,
@@ -37772,7 +37816,8 @@ exports.default = (0, _withStyles2.default)(styles, { name: 'MuiHiddenCss' })(Hi
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.default = Chat;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = __webpack_require__(1);
 
@@ -37780,23 +37825,137 @@ var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function Chat(props) {
-    return _react2.default.createElement(
-        'div',
-        { className: 'chat' },
-        _react2.default.createElement(
-            'ul',
-            null,
-            props.messages.map(function (item, index) {
-                return _react2.default.createElement(
-                    'li',
-                    { key: index },
-                    item
-                );
-            })
-        )
-    );
-}
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Chat = function (_React$Component) {
+    _inherits(Chat, _React$Component);
+
+    function Chat(props) {
+        _classCallCheck(this, Chat);
+
+        return _possibleConstructorReturn(this, (Chat.__proto__ || Object.getPrototypeOf(Chat)).call(this, props));
+    }
+
+    _createClass(Chat, [{
+        key: 'render',
+        value: function render() {
+            var style = {
+                height: window.innerHeight * 0.6 + 'px'
+            };
+            return _react2.default.createElement(
+                'div',
+                { className: 'chat' },
+                _react2.default.createElement(
+                    'ul',
+                    { style: style, className: 'chat-list' },
+                    this.props.messages.map(function (item, index) {
+                        return _react2.default.createElement(
+                            'li',
+                            { style: { color: item.color }, key: index },
+                            item.text
+                        );
+                    })
+                )
+            );
+        }
+    }]);
+
+    return Chat;
+}(_react2.default.Component);
+
+exports.default = Chat;
+
+/***/ }),
+/* 318 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var socket = void 0;
+
+var Lobby = function (_React$Component) {
+    _inherits(Lobby, _React$Component);
+
+    function Lobby(props) {
+        _classCallCheck(this, Lobby);
+
+        var _this = _possibleConstructorReturn(this, (Lobby.__proto__ || Object.getPrototypeOf(Lobby)).call(this, props));
+
+        socket = props.socket;
+        _this.state = {
+            textBox: ''
+        };
+        return _this;
+    }
+
+    _createClass(Lobby, [{
+        key: 'handleChange',
+        value: function handleChange(event) {
+            this.setState({ textBox: event.target.value });
+        }
+    }, {
+        key: 'handleSubmit',
+        value: function handleSubmit(event) {
+            event.preventDefault();
+            if (this.state.textBox) {
+                console.log('joining room ' + this.state.textBox);
+                socket.emit('join room', this.state.textBox);
+            }
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            var _this2 = this;
+
+            return _react2.default.createElement(
+                'div',
+                { className: 'lobby' },
+                _react2.default.createElement(
+                    'form',
+                    { onSubmit: function onSubmit(e) {
+                            return _this2.handleSubmit(e);
+                        } },
+                    _react2.default.createElement(
+                        'label',
+                        null,
+                        'Enter game code: '
+                    ),
+                    _react2.default.createElement('input', { type: 'text', onChange: function onChange(e) {
+                            return _this2.handleChange(e);
+                        } }),
+                    _react2.default.createElement('input', { type: 'submit', value: 'Join game' })
+                )
+            );
+        }
+    }]);
+
+    return Lobby;
+}(_react2.default.Component);
+
+exports.default = Lobby;
 
 /***/ })
 /******/ ]);

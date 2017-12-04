@@ -15,16 +15,15 @@ export default class Board extends React.Component {
         const gameMap = this.props.gameMap
         var style = {
             width: `${width}px`,
-            height: `${width}px`,
-            lineHeight: `${width}px`
+            height: `${width}px`
         }
         return (
             <div>
                 <div style={style} className='block corner corner-tl top left'>
-                    <h3>{gameMap[30].name}</h3>
+                    <h3>{gameMap[20].name}</h3>
                 </div>
                 <div style={style} className='block corner corner-tr top right'>
-                    <h3>{gameMap[20].name}</h3>
+                    <h3>{gameMap[30].name}</h3>
                 </div>
                 <div style={style} className='block corner corner-bl bottom left'>
                     <h3>{gameMap[10].name}</h3>
@@ -56,8 +55,8 @@ export default class Board extends React.Component {
             }
             blocks.push(
                 <div key={`${side}-${i}`} style={blockStyle} className={`block ${side} ${side}-${i}`}>
-                    <h3 className='block-text top'>{item.name}</h3>
-                    <h4 className='block-text bottom'>{`${item.price ? item.price : ''}`}</h4>
+                    <h3 style={{ top: `${length / 10}px` }} className='block-text'>{item.name}</h3>
+                    <h4 style={{ bottom: `${length / 10}px` }} className='block-text'>{`${item.price ? this.abbreviateNumber(item.price) : ''}`}</h4>
                 </div>
             )
         }
@@ -66,6 +65,16 @@ export default class Board extends React.Component {
                 {blocks}
             </div>
         )
+    }
+
+    abbreviateNumber(value) {
+        var suffixes = ["", "k", "m", "b", "t"]
+        var suffixNum = Math.floor(("" + value).length / 3)
+        var shortValue = parseFloat((suffixNum != 0 ? (value / Math.pow(1000, suffixNum)) : value).toPrecision(2))
+        if (shortValue % 1 != 0) {
+            var shortNum = shortValue.toFixed(1)
+        }
+        return shortValue + suffixes[suffixNum]
     }
 
     handleClick() {
@@ -79,7 +88,7 @@ export default class Board extends React.Component {
 
     render() {
         const gameMap = this.props.gameMap
-        const a = window.innerHeight * 0.8 / 13
+        const a = window.innerHeight * 0.9 / 13
         const rotate = this.state.rotate
         const boardStyle = {
             width: 13 * a,
