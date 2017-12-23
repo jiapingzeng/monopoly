@@ -1,5 +1,9 @@
 {
-  "name":  "Gunn Edition",
+  "name": "Gunn Edition",
+  "unit": {
+    "long": "hours of sleep",
+    "short": "hr"
+  },
   "places": [
     {
       "name": "Weekend",
@@ -8,7 +12,7 @@
     {
       "name": "Chris Johnson",
       "type": "city",
-      "price": 600000
+      "price": 0.6
     },
     {
       "name": "Community Chest",
@@ -17,22 +21,22 @@
     {
       "name": "Diane Gleason",
       "type": "city",
-      "price": 600000
+      "price": 0.6
     },
     {
       "name": "Double Flex Time",
       "type": "tax",
-      "amount": 2000000
+      "amount": 2
     },
     {
       "name": "Monopoly Rail",
       "type": "transport",
-      "price": 2000000
+      "price": 2
     },
     {
       "name": "Jordan King",
       "type": "city",
-      "price": 1000000
+      "price": 1
     },
     {
       "name": "Chance",
@@ -41,12 +45,12 @@
     {
       "name": "Chris Karas",
       "type": "city",
-      "price": 1000000
+      "price": 1
     },
     {
       "name": "Marcel Losier",
       "type": "city",
-      "price": 1200000
+      "price": 1.2
     },
     {
       "name": "Thursday School",
@@ -55,32 +59,32 @@
     {
       "name": "Anne Dumontier",
       "type": "city",
-      "price": 1400000
+      "price": 1.4
     },
     {
       "name": "Steven Ames",
       "type": "utility",
-      "price": 1500000
+      "price": 1.5
     },
     {
       "name": "Mark Gleason",
       "type": "city",
-      "price": 1400000
+      "price": 1.4
     },
     {
       "name": "Josh Paley",
       "type": "city",
-      "price": 1600000
+      "price": 1.6
     },
     {
       "name": "Monopoly Air",
       "type": "transport",
-      "price": 2000000
+      "price": 2
     },
     {
       "name": "Derek Yee",
       "type": "city",
-      "price": 1800000
+      "price": 1.8
     },
     {
       "name": "Community Chest",
@@ -89,12 +93,12 @@
     {
       "name": "Ellen Feigenbaum",
       "type": "city",
-      "price": 1800000
+      "price": 1.8
     },
     {
       "name": "Lynne Navarro",
       "type": "city",
-      "price": 2000000
+      "price": 2
     },
     {
       "name": "Prep",
@@ -103,7 +107,7 @@
     {
       "name": "Heather Mellows",
       "type": "city",
-      "price": 2200000
+      "price": 2.2
     },
     {
       "name": "Chance",
@@ -112,37 +116,37 @@
     {
       "name": "Ellen Feigenbaum",
       "type": "city",
-      "price": 2200000
+      "price": 2.2
     },
     {
       "name": "Dave Deggeller",
       "type": "city",
-      "price": 2400000
+      "price": 2.4
     },
     {
       "name": "Monopoly Cruise",
       "type": "transport",
-      "price": 2000000
+      "price": 2
     },
     {
       "name": "Diane Ichikawa",
       "type": "city",
-      "price": 2600000
+      "price": 2
     },
     {
       "name": "Maria Powell",
       "type": "city",
-      "price": 2600000
+      "price": 2.6
     },
     {
       "name": "Wind Energy",
       "type": "utility",
-      "price": 1500000
+      "price": 1.5
     },
     {
       "name": "Julie Munger",
       "type": "city",
-      "price": 2800000
+      "price": 2.8
     },
     {
       "name": "Go to Thursday School",
@@ -151,12 +155,12 @@
     {
       "name": "Kathy Hawes",
       "type": "city",
-      "price": 3000000
+      "price": 3
     },
     {
       "name": "Belgrade",
       "type": "city",
-      "price": 3000000
+      "price": 3
     },
     {
       "name": "Community Chest",
@@ -165,12 +169,12 @@
     {
       "name": "Casey O'Connell",
       "type": "city",
-      "price": 3200000
+      "price": 3.2
     },
     {
       "name": "Monopoly Space",
       "type": "transport",
-      "price": 2000000
+      "price": 2
     },
     {
       "name": "Chance",
@@ -179,17 +183,17 @@
     {
       "name": "Bill Dunbar",
       "type": "city",
-      "price": 3500000
+      "price": 3.5
     },
     {
       "name": "Flex Time",
       "type": "tax",
-      "amount": 1000000
+      "amount": 1
     },
     {
-      "name": "Keith Ledgerwood",
+      "name": "Eric Ledgerwood",
       "type": "city",
-      "price": 4000000
+      "price": 4
     }
   ],
   "chance": [

@@ -1,11 +1,11 @@
 import React from 'react'
-import Card, { CardActions, CardContent } from 'material-ui/Card'
-import Grid from 'material-ui/Grid'
 
 export default class Board extends React.Component {
     constructor(props) {
         super(props)
         console.log(props.gameMap)
+        console.log(props.unit)
+        console.log(props.players)
         this.state = {
             rotate: 360
         }
@@ -36,6 +36,8 @@ export default class Board extends React.Component {
     }
 
     renderSide(side, length, data) {
+        const unit = this.props.unit
+
         var style = {
             width: `${9 * length}px`,
             height: `${2 * length}px`,
@@ -53,10 +55,12 @@ export default class Board extends React.Component {
                 height: `${2 * length}px`,
                 left: `${length * i}px`
             }
+            // TODO: change image
             blocks.push(
                 <div key={`${side}-${i}`} style={blockStyle} className={`block ${side} ${side}-${i}`}>
                     <h3 style={{ top: `${length / 10}px` }} className='block-text'>{item.name}</h3>
-                    <h4 style={{ bottom: `${length / 10}px` }} className='block-text'>{`${item.price ? this.abbreviateNumber(item.price) : ''}`}</h4>
+                    <h4 style={{ bottom: `${length / 10}px` }} className='block-text'>{`${item.price ? item.price + unit.short : ''}`}</h4>
+                    <img style={{ width: `${length * 0.75}px`, position: 'absolute', left: `${length * 0.125}px`, top: `${length / 2}px` }} src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/Disk_pack1.svg/1200px-Disk_pack1.svg.png" />
                 </div>
             )
         }
@@ -65,16 +69,6 @@ export default class Board extends React.Component {
                 {blocks}
             </div>
         )
-    }
-
-    abbreviateNumber(value) {
-        var suffixes = ["", "k", "m", "b", "t"]
-        var suffixNum = Math.floor(("" + value).length / 3)
-        var shortValue = parseFloat((suffixNum != 0 ? (value / Math.pow(1000, suffixNum)) : value).toPrecision(2))
-        if (shortValue % 1 != 0) {
-            var shortNum = shortValue.toFixed(1)
-        }
-        return shortValue + suffixes[suffixNum]
     }
 
     handleClick() {

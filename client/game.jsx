@@ -15,7 +15,9 @@ export default class Game extends React.Component {
             hasUsername: false,
             isInGame: false,
             gameMap: [],
-            messages: []
+            unit: {},
+            messages: [],
+            players: []
         }
     }
 
@@ -32,13 +34,20 @@ export default class Game extends React.Component {
         socket.on('game started', (data) => {
             console.log('map received')
             this.setState({ gameMap: data.places })
-            console.log(this.state.gameMap)
+            this.setState({ unit: data.unit })
+        })
+        socket.on('player moved', (data) => {
+            const players = data.players
+            for (var i = 0; i < players.length; i++) {
+                const player = players[i]
+                console.log(player)
+            }
+            this.setState({ players: players })
         })
         socket.on('message added', (data) => {
             this.addMessage(`${data.sender}: ${data.text}`, data.color)
         })
         socket.on('room joined', (data) => {
-            console.log(data)
             this.setState({ isInGame: true })
             socket.emit('start game', { mapName: 'gunn' })
         })
@@ -71,14 +80,15 @@ export default class Game extends React.Component {
 
     render() {
         const gameMap = this.state.gameMap
+        const unit = this.state.unit
         const messages = this.state.messages
         const hasUsername = this.state.hasUsername
         const isInGame = this.state.isInGame
-
+        const players = this.state.players
         let board
-        if (gameMap.length > 0) {
+        if (gameMap.length > 0 && unit.long) {
             board = (
-                <Board gameMap={gameMap} />
+                <Board gameMap={gameMap} unit={unit} players={players} />
             )
         } else {
             board = (
@@ -113,9 +123,9 @@ export default class Game extends React.Component {
                             <input type='submit' value={this.state.hasUsername ? 'Send' : 'Submit'} />
                         </form>
                         <Chat messages={messages} />
-                        <div>{lobby}</div>                        
+                        <div>{lobby}</div>
                     </div>
-                    <div>{board}</div>                    
+                    <div>{board}</div>
                 </div>
             </div>
         )

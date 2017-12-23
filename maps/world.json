@@ -1,5 +1,9 @@
 {
-  "name":  "World Edition"
+  "name": "World Edition",
+  "unit": {
+    "long": "millions",
+    "short": "M"
+  },
   "places": [
     {
       "name": "GO",
