@@ -37,12 +37,7 @@ export default class Game extends React.Component {
             this.setState({ unit: data.unit })
         })
         socket.on('player moved', (data) => {
-            const players = data.players
-            for (var i = 0; i < players.length; i++) {
-                const player = players[i]
-                console.log(player)
-            }
-            this.setState({ players: players })
+            this.setState({ players: data.players })
         })
         socket.on('message added', (data) => {
             this.addMessage(`${data.sender}: ${data.text}`, data.color)
@@ -64,10 +59,13 @@ export default class Game extends React.Component {
     handleSubmit(event) {
         event.preventDefault()
         if (this.state.textBox) {
-            console.log(this.state.textBox)
             if (this.state.hasUsername) {
                 const message = this.state.textBox
                 socket.emit('add message', { type: 'global', text: message })
+                // TODO: change this
+                if (message == 'move') {
+                    socket.emit('make move')
+                }
                 this.setState({ textBox: '' })
             } else {
                 socket.emit('set username', this.state.textBox)
@@ -86,7 +84,8 @@ export default class Game extends React.Component {
         const isInGame = this.state.isInGame
         const players = this.state.players
         let board
-        if (gameMap.length > 0 && unit.long) {
+        if (gameMap.length > 0 && unit.long && players.length > 0) {
+            console.log(players)
             board = (
                 <Board gameMap={gameMap} unit={unit} players={players} />
             )

@@ -6,191 +6,231 @@
   },
   "places": [
     {
+      "index": 0,
       "name": "Weekend",
       "type": "go"
     },
     {
+      "index": 1,
       "name": "Chris Johnson",
       "type": "city",
       "price": 0.6
     },
     {
+      "index": 2,
       "name": "Community Chest",
       "type": "chest"
     },
     {
+      "index": 3,
       "name": "Diane Gleason",
       "type": "city",
       "price": 0.6
     },
     {
+      "index": 4,
       "name": "Double Flex Time",
       "type": "tax",
       "amount": 2
     },
     {
+      "index": 5,
       "name": "Monopoly Rail",
       "type": "transport",
       "price": 2
     },
     {
+      "index": 6,
       "name": "Jordan King",
       "type": "city",
       "price": 1
     },
     {
+      "index": 7,
       "name": "Chance",
       "type": "chance"
     },
     {
+      "index": 8,
       "name": "Chris Karas",
       "type": "city",
       "price": 1
     },
     {
+      "index": 9,
       "name": "Marcel Losier",
       "type": "city",
       "price": 1.2
     },
     {
+      "index": 10,
       "name": "Thursday School",
       "type": "jail"
     },
     {
+      "index": 11,
       "name": "Anne Dumontier",
       "type": "city",
       "price": 1.4
     },
     {
+      "index": 12,
       "name": "Steven Ames",
       "type": "utility",
       "price": 1.5
     },
     {
+      "index": 13,
       "name": "Mark Gleason",
       "type": "city",
       "price": 1.4
     },
     {
+      "index": 14,
       "name": "Josh Paley",
       "type": "city",
       "price": 1.6
     },
     {
+      "index": 15,
       "name": "Monopoly Air",
       "type": "transport",
       "price": 2
     },
     {
+      "index": 16,
       "name": "Derek Yee",
       "type": "city",
       "price": 1.8
     },
     {
+      "index": 17,
       "name": "Community Chest",
       "type": "chest"
     },
     {
+      "index": 18,
       "name": "Ellen Feigenbaum",
       "type": "city",
       "price": 1.8
     },
     {
+      "index": 19,
       "name": "Lynne Navarro",
       "type": "city",
       "price": 2
     },
     {
+      "index": 20,
       "name": "Prep",
       "type": "parking"
     },
     {
+      "index": 21,
       "name": "Heather Mellows",
       "type": "city",
       "price": 2.2
     },
     {
+      "index": 22,
       "name": "Chance",
       "type": "chance"
     },
     {
+      "index": 23,
       "name": "Ellen Feigenbaum",
       "type": "city",
       "price": 2.2
     },
     {
+      "index": 24,
       "name": "Dave Deggeller",
       "type": "city",
       "price": 2.4
     },
     {
+      "index": 25,
       "name": "Monopoly Cruise",
       "type": "transport",
       "price": 2
     },
     {
+      "index": 26,
       "name": "Diane Ichikawa",
       "type": "city",
       "price": 2
     },
     {
+      "index": 27,
       "name": "Maria Powell",
       "type": "city",
       "price": 2.6
     },
     {
+      "index": 28,
       "name": "Wind Energy",
       "type": "utility",
       "price": 1.5
     },
     {
+      "index": 29,
       "name": "Julie Munger",
       "type": "city",
       "price": 2.8
     },
     {
+      "index": 30,
       "name": "Go to Thursday School",
       "type": "teleport"
     },
     {
+      "index": 31,
       "name": "Kathy Hawes",
       "type": "city",
       "price": 3
     },
     {
+      "index": 32,
       "name": "Belgrade",
       "type": "city",
       "price": 3
     },
     {
+      "index": 33,
       "name": "Community Chest",
       "type": "chest"
     },
     {
+      "index": 34,
       "name": "Casey O'Connell",
       "type": "city",
       "price": 3.2
     },
     {
+      "index": 35,
       "name": "Monopoly Space",
       "type": "transport",
       "price": 2
     },
     {
+      "index": 36,
       "name": "Chance",
       "type": "chance"
     },
     {
+      "index": 37,
       "name": "Bill Dunbar",
       "type": "city",
       "price": 3.5
     },
     {
+      "index": 38,
       "name": "Flex Time",
       "type": "tax",
       "amount": 1
     },
     {
+      "index": 39,
       "name": "Eric Ledgerwood",
       "type": "city",
       "price": 4

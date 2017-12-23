@@ -3,9 +3,6 @@ import React from 'react'
 export default class Board extends React.Component {
     constructor(props) {
         super(props)
-        console.log(props.gameMap)
-        console.log(props.unit)
-        console.log(props.players)
         this.state = {
             rotate: 360
         }
@@ -37,6 +34,7 @@ export default class Board extends React.Component {
 
     renderSide(side, length, data) {
         const unit = this.props.unit
+        const players = this.props.players
 
         var style = {
             width: `${9 * length}px`,
@@ -55,12 +53,22 @@ export default class Board extends React.Component {
                 height: `${2 * length}px`,
                 left: `${length * i}px`
             }
+            // TODO: check player overlap
+            let playerBlock
+            for (var j = 0; j < players.length; j++) {
+                var player = players[j]
+                if (player.position == item.index) {
+                    playerBlock = (
+                        <p>{player.name}</p>
+                    )
+                }
+            }
             // TODO: change image
             blocks.push(
                 <div key={`${side}-${i}`} style={blockStyle} className={`block ${side} ${side}-${i}`}>
                     <h3 style={{ top: `${length / 10}px` }} className='block-text'>{item.name}</h3>
                     <h4 style={{ bottom: `${length / 10}px` }} className='block-text'>{`${item.price ? item.price + unit.short : ''}`}</h4>
-                    <img style={{ width: `${length * 0.75}px`, position: 'absolute', left: `${length * 0.125}px`, top: `${length / 2}px` }} src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/Disk_pack1.svg/1200px-Disk_pack1.svg.png" />
+                    <div style={{ position: 'absolute', top: `${length}px` }} className='block-text'>{playerBlock}</div>
                 </div>
             )
         }

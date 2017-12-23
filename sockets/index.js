@@ -7,15 +7,18 @@ const socketUsers = new Map()
 const socketRooms = new Map()
 //var socketRoom = {
 //    map: {},
+//    turn: 0,
 //    players: [{
 //        name: '',
 //        id: '',
+//        order: 0,
 //        ready: false,
 //        position: 0,
 //        wealth: 0,
 //        properties: []
 //    }]
 //}
+// TODO: remove name property and use socketUsers.get(players.id)
 
 export default function attachSockets(io) {
     io.on('connection', (socket) => {
@@ -25,6 +28,7 @@ export default function attachSockets(io) {
         socket.on('set username', (username) => {
             if (!socketUsers.has(socket.id)) {
                 console.log(`${socket.id} is now ${username}`)
+                socket.username = username
                 socketUsers.set(socket.id, { username: username })
             }
         })
@@ -89,24 +93,56 @@ export default function attachSockets(io) {
             })
             sendSystemMessage('Thanks for playing monopoly!')
             sendSystemMessage('This game is currently in testing and is probably full of bugs.')
-            sendSystemMessage('Here are some known issues: ')
-            sendSystemMessage('1. Everything looks ugly as fuck')
-            sendSystemMessage('2. The game doesn\'t work at all')
+        })
+
+        socket.on('make move', (data) => {
+            var room = socketRooms.get(socket.room)
+            var players = room.players
+            var index = -1
+            // get player
+            for (var i = 0; i < players.length; i++) {
+                if (players[i].id == socket.id) {
+                    index = i
+                    break
+                }
+            }
+            const player = players[index]
+            if (room.turn == player.order) {
+                // make move
+                const moveBy = getRandomNumber(1, 6) + getRandomNumber(1, 6)
+                movePlayer(room, index, moveBy)
+                // update turn
+                room.turn++
+                if (room.turn >= players.length) {
+                    room.turn -= players.length
+                }
+                socketRooms.set(socket.room, room)
+                emitToAll(socket.room, 'player moved', room)
+            }            
         })
 
         socket.on('disconnect', () => {
-            console.log(`${socket.id} disconnected`)
+            console.log(`user ${socket.id} disconnected`)
             if (socketUsers.get(socket.id)) {
                 var room = socketRooms.get(socket.room)
                 var players = room.players
+                // remove player from room
                 for (var i = 0; i < players.length; i++) {
                     if (players[i].id == socket.id) {
+                        console.log(`${socket.username} has left room ${socket.room}`)
                         players.splice(i, 1)
                         break
                     }
                 }
-                socketRooms.set(socket.room, room)
+                // delete room if there is no one left
+                if (players.length <= 0) {
+                    console.log(`room ${socket.room} deleted`)
+                    socketRooms.delete(socket.room)
+                } else {
+                    socketRooms.set(socket.room, room)
+                }
             }
+            // delete user
             socketUsers.delete(socket.id)
         })
 
@@ -128,7 +164,7 @@ export default function attachSockets(io) {
 
         var readyToStart = (roomId) => {
             var players = socketRooms.get(roomId).players
-            if (players.length < 2) return false
+            //if (players.length < 4) return false
             for (var i = 0; i < players.length; i++) {
                 if (!players[i].ready) return false
             }
@@ -138,8 +174,10 @@ export default function attachSockets(io) {
         var initializeGame = (roomId, map) => {
             var room = socketRooms.get(roomId)
             room.map = map
+            room.turn = 0
             for (var i = 0; i < room.players.length; i++) {
                 var player = room.players[i]
+                player.order = i
                 player.position = 0
                 player.wealth = 0
                 player.properties = []
@@ -149,6 +187,14 @@ export default function attachSockets(io) {
         var emitToAll = (roomId, event, data) => {
             socket.emit(event, data)
             socket.broadcast.to(roomId).emit(event, data)
+        }
+
+        var movePlayer = (room, playerIndex, moveBy) => {
+            var players = room.players
+            // update player position
+            sendSystemMessage(`${players[playerIndex].name} moved ${moveBy} steps`, socket.room)
+            var newPos = players[playerIndex].position + moveBy
+            players[playerIndex].position = newPos >= 40 ? newPos - 40 : newPos
         }
     })
 }
