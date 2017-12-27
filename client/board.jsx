@@ -53,22 +53,18 @@ export default class Board extends React.Component {
                 height: `${2 * length}px`,
                 left: `${length * i}px`
             }
-            // TODO: check player overlap
-            let playerBlock
-            for (var j = 0; j < players.length; j++) {
-                var player = players[j]
-                if (player.position == item.index) {
-                    playerBlock = (
-                        <p>{player.name}</p>
-                    )
-                }
-            }
             // TODO: change image
             blocks.push(
                 <div key={`${side}-${i}`} style={blockStyle} className={`block ${side} ${side}-${i}`}>
                     <h3 style={{ top: `${length / 10}px` }} className='block-text'>{item.name}</h3>
                     <h4 style={{ bottom: `${length / 10}px` }} className='block-text'>{`${item.price ? item.price + unit.short : ''}`}</h4>
-                    <div style={{ position: 'absolute', top: `${length}px` }} className='block-text'>{playerBlock}</div>
+                    <div style={{ position: 'absolute', top: `${length}px` }} className='block-text'>{players.map((player) => {
+                        if (player.position == item.index) {
+                            return (
+                                <h1>{player.name}</h1>
+                            )
+                        }                        
+                    })}</div>
                 </div>
             )
         }

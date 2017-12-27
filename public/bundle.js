@@ -24976,25 +24976,15 @@ var Board = function (_React$Component) {
                 style.transformOrigin = side + ' top';
             }
             var blocks = [];
-            for (var i = 0; i < 9; i++) {
+
+            var _loop = function _loop() {
                 var item = data[8 - i];
-                var blockStyle = {
+                blockStyle = {
                     width: length + 'px',
                     height: 2 * length + 'px',
                     left: length * i + 'px'
-                    // TODO: check player overlap
-                };var playerBlock = void 0;
-                for (var j = 0; j < players.length; j++) {
-                    var player = players[j];
-                    if (player.position == item.index) {
-                        playerBlock = _react2.default.createElement(
-                            'p',
-                            null,
-                            player.name
-                        );
-                    }
-                }
-                // TODO: change image
+                    // TODO: change image
+                };
                 blocks.push(_react2.default.createElement(
                     'div',
                     { key: side + '-' + i, style: blockStyle, className: 'block ' + side + ' ' + side + '-' + i },
@@ -25011,9 +25001,23 @@ var Board = function (_React$Component) {
                     _react2.default.createElement(
                         'div',
                         { style: { position: 'absolute', top: length + 'px' }, className: 'block-text' },
-                        playerBlock
+                        players.map(function (player) {
+                            if (player.position == item.index) {
+                                return _react2.default.createElement(
+                                    'h1',
+                                    null,
+                                    player.name
+                                );
+                            }
+                        })
                     )
                 ));
+            };
+
+            for (var i = 0; i < 9; i++) {
+                var blockStyle;
+
+                _loop();
             }
             return _react2.default.createElement(
                 'div',

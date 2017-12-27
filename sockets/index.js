@@ -71,7 +71,6 @@ export default function attachSockets(io) {
                 socket.emit('room joined', room)
                 sendSystemMessage(`room ${roomId} has been created by ${username}.`)
             }
-            console.log(socketRooms.get(roomId))
         })
 
         socket.on('start game', (data) => {
@@ -178,7 +177,7 @@ export default function attachSockets(io) {
             for (var i = 0; i < room.players.length; i++) {
                 var player = room.players[i]
                 player.order = i
-                player.position = 0
+                player.position = 1
                 player.wealth = 0
                 player.properties = []
             }
