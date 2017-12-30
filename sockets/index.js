@@ -177,7 +177,7 @@ export default function attachSockets(io) {
             for (var i = 0; i < room.players.length; i++) {
                 var player = room.players[i]
                 player.order = i
-                player.position = 1
+                player.position = 0
                 player.wealth = 0
                 player.properties = []
             }

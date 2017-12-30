@@ -21572,6 +21572,10 @@ var _lobby = __webpack_require__(72);
 
 var _lobby2 = _interopRequireDefault(_lobby);
 
+var _stats = __webpack_require__(73);
+
+var _stats2 = _interopRequireDefault(_stats);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -21674,10 +21678,12 @@ var Game = function (_React$Component) {
             var hasUsername = this.state.hasUsername;
             var isInGame = this.state.isInGame;
             var players = this.state.players;
-            var board = void 0;
+            var board = void 0,
+                stats = void 0;
             if (gameMap.length > 0 && unit.long && players.length > 0) {
                 console.log(players);
                 board = _react2.default.createElement(_board2.default, { gameMap: gameMap, unit: unit, players: players });
+                stats = _react2.default.createElement(_stats2.default, { players: players });
             } else {
                 board = _react2.default.createElement(
                     'div',
@@ -21750,6 +21756,11 @@ var Game = function (_React$Component) {
                         'div',
                         null,
                         board
+                    ),
+                    _react2.default.createElement(
+                        'div',
+                        null,
+                        stats
                     )
                 )
             );
@@ -24961,6 +24972,51 @@ var Board = function (_React$Component) {
             );
         }
     }, {
+        key: 'renderCorner',
+        value: function renderCorner(width, side1, side2) {
+            var gameMap = this.props.gameMap;
+            var players = this.props.players;
+            var s = void 0;
+            if (side1 == 'top') {
+                if (side2 == 'left') s = 20;
+                if (side2 == 'right') s = 30;
+            } else if (side1 == 'bottom') {
+                if (side2 == 'left') s = 10;
+                if (side2 == 'right') s = 0;
+            }
+            var item = gameMap[s];
+            var style = {
+                width: width + 'px',
+                height: width + 'px'
+            };
+            return _react2.default.createElement(
+                'div',
+                null,
+                _react2.default.createElement(
+                    'div',
+                    { style: style, className: 'block corner corner-' + (side1.charAt(0) + side2.charAt(0)) + ' ' + side1 + ' ' + side2 },
+                    _react2.default.createElement(
+                        'h3',
+                        null,
+                        item.name
+                    )
+                ),
+                _react2.default.createElement(
+                    'div',
+                    { style: style, className: 'block ' + side1 + ' ' + side2 },
+                    players.map(function (player) {
+                        if (player.position == item.index) {
+                            return _react2.default.createElement(
+                                'h1',
+                                { key: player.order },
+                                player.name
+                            );
+                        }
+                    })
+                )
+            );
+        }
+    }, {
         key: 'renderSide',
         value: function renderSide(side, length, data) {
             var unit = this.props.unit;
@@ -25005,7 +25061,7 @@ var Board = function (_React$Component) {
                             if (player.position == item.index) {
                                 return _react2.default.createElement(
                                     'h1',
-                                    null,
+                                    { key: player.order },
                                     player.name
                                 );
                             }
@@ -25068,7 +25124,10 @@ var Board = function (_React$Component) {
                         'Rotate'
                     )
                 ),
-                this.renderCorners(2 * a),
+                this.renderCorner(2 * a, 'top', 'left'),
+                this.renderCorner(2 * a, 'top', 'right'),
+                this.renderCorner(2 * a, 'bottom', 'left'),
+                this.renderCorner(2 * a, 'bottom', 'right'),
                 this.renderSide('top', a, gameMap.slice(21, 30)),
                 this.renderSide('bottom', a, gameMap.slice(1, 10)),
                 this.renderSide('left', a, gameMap.slice(11, 20)),
@@ -25232,6 +25291,74 @@ var Lobby = function (_React$Component) {
 }(_react2.default.Component);
 
 exports.default = Lobby;
+
+/***/ }),
+/* 73 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(3);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Stats = function (_React$Component) {
+    _inherits(Stats, _React$Component);
+
+    function Stats(props) {
+        _classCallCheck(this, Stats);
+
+        return _possibleConstructorReturn(this, (Stats.__proto__ || Object.getPrototypeOf(Stats)).call(this, props));
+    }
+
+    _createClass(Stats, [{
+        key: 'render',
+        value: function render() {
+            var style = {
+                backgroundColor: 'red'
+            };
+            console.log('IT WORKS');
+            console.log(this.props.players);
+            this.props.players.map(function (p) {
+                console.log(p);
+            });
+            return _react2.default.createElement(
+                'div',
+                { style: style },
+                this.props.players.map(function (player) {
+                    _react2.default.createElement(
+                        'div',
+                        null,
+                        _react2.default.createElement(
+                            'h3',
+                            null,
+                            'test'
+                        )
+                    );
+                })
+            );
+        }
+    }]);
+
+    return Stats;
+}(_react2.default.Component);
+
+exports.default = Stats;
 
 /***/ })
 /******/ ]);

@@ -32,6 +32,38 @@ export default class Board extends React.Component {
         )
     }
 
+    renderCorner(width, side1, side2) {
+        const gameMap = this.props.gameMap
+        const players = this.props.players
+        let s
+        if (side1 == 'top') {
+            if (side2 == 'left') s = 20
+            if (side2 == 'right') s = 30
+        } else if (side1 == 'bottom') {
+            if (side2 == 'left') s = 10
+            if (side2 == 'right') s = 0
+        }
+        const item = gameMap[s]
+        var style = {
+            width: `${width}px`,
+            height: `${width}px`
+        }
+        return (
+            <div>
+                <div style={style} className={`block corner corner-${side1.charAt(0) + side2.charAt(0)} ${side1} ${side2}`}>
+                    <h3>{item.name}</h3>
+                </div>
+                <div style={style} className={`block ${side1} ${side2}`}>{players.map((player) => {
+                    if (player.position == item.index) {
+                        return (
+                            <h1 key={player.order}>{player.name}</h1>
+                        )
+                    }
+                })}</div>
+            </div>
+        )
+    }
+
     renderSide(side, length, data) {
         const unit = this.props.unit
         const players = this.props.players
@@ -61,9 +93,9 @@ export default class Board extends React.Component {
                     <div style={{ position: 'absolute', top: `${length}px` }} className='block-text'>{players.map((player) => {
                         if (player.position == item.index) {
                             return (
-                                <h1>{player.name}</h1>
+                                <h1 key={player.order}>{player.name}</h1>
                             )
-                        }                        
+                        }
                     })}</div>
                 </div>
             )
@@ -104,7 +136,10 @@ export default class Board extends React.Component {
                 <div style={centerStyle} className={`block center-block rotate-${360 - rotate}`}>
                     <button onClick={() => this.handleClick()}>Rotate</button>
                 </div>
-                {this.renderCorners(2 * a)}
+                {this.renderCorner(2 * a, 'top', 'left')}
+                {this.renderCorner(2 * a, 'top', 'right')}
+                {this.renderCorner(2 * a, 'bottom', 'left')}
+                {this.renderCorner(2 * a, 'bottom', 'right')}
                 {this.renderSide('top', a, gameMap.slice(21, 30))}
                 {this.renderSide('bottom', a, gameMap.slice(1, 10))}
                 {this.renderSide('left', a, gameMap.slice(11, 20))}

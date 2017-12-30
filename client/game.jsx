@@ -4,6 +4,7 @@ import io from 'socket.io-client'
 import Board from './board.jsx'
 import Chat from './chat.jsx'
 import Lobby from './lobby.jsx'
+import Stats from './stats.jsx'
 
 let socket
 
@@ -83,11 +84,14 @@ export default class Game extends React.Component {
         const hasUsername = this.state.hasUsername
         const isInGame = this.state.isInGame
         const players = this.state.players
-        let board
+        let board, stats
         if (gameMap.length > 0 && unit.long && players.length > 0) {
             console.log(players)
             board = (
                 <Board gameMap={gameMap} unit={unit} players={players} />
+            )
+            stats = (
+                <Stats players={players} />
             )
         } else {
             board = (
@@ -125,6 +129,7 @@ export default class Game extends React.Component {
                         <div>{lobby}</div>
                     </div>
                     <div>{board}</div>
+                    <div>{stats}</div>
                 </div>
             </div>
         )
