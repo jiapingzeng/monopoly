@@ -110,6 +110,7 @@ export default function attachSockets(io) {
                 // make move
                 const moveBy = getRandomNumber(1, 6) + getRandomNumber(1, 6)
                 movePlayer(room, index, moveBy)
+                player.wealth += 10
                 // update turn
                 room.turn++
                 if (room.turn >= players.length) {

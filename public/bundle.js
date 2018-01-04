@@ -21705,7 +21705,7 @@ var Game = function (_React$Component) {
                 lobby = _react2.default.createElement(_lobby2.default, { socket: socket });
             }
             var chatStyle = {
-                width: 400 + 'px',
+                width: 350 + 'px',
                 height: window.innerHeight * 0.8 + 'px',
                 position: 'fixed',
                 right: 0,
@@ -21722,6 +21722,11 @@ var Game = function (_React$Component) {
                 _react2.default.createElement(
                     'div',
                     null,
+                    _react2.default.createElement(
+                        'div',
+                        null,
+                        stats
+                    ),
                     _react2.default.createElement(
                         'div',
                         { style: chatStyle },
@@ -21756,11 +21761,6 @@ var Game = function (_React$Component) {
                         'div',
                         null,
                         board
-                    ),
-                    _react2.default.createElement(
-                        'div',
-                        null,
-                        stats
                     )
                 )
             );
@@ -25330,7 +25330,14 @@ var Stats = function (_React$Component) {
         key: 'render',
         value: function render() {
             var style = {
-                backgroundColor: 'red'
+                width: 350 + 'px',
+                height: window.innerHeight * 0.8 + 'px',
+                position: 'fixed',
+                left: '0px',
+                outline: 'black solid 3px'
+            };
+            var blockStyle = {
+                outline: 'black solid 2px'
             };
             console.log('IT WORKS');
             console.log(this.props.players);
@@ -25340,14 +25347,24 @@ var Stats = function (_React$Component) {
             return _react2.default.createElement(
                 'div',
                 { style: style },
+                _react2.default.createElement(
+                    'h2',
+                    null,
+                    'player stats'
+                ),
                 this.props.players.map(function (player) {
-                    _react2.default.createElement(
+                    return _react2.default.createElement(
                         'div',
-                        null,
+                        { key: player.order, style: blockStyle },
                         _react2.default.createElement(
-                            'h3',
+                            'h2',
                             null,
-                            'test'
+                            player.name
+                        ),
+                        _react2.default.createElement(
+                            'h4',
+                            null,
+                            player.wealth
                         )
                     );
                 })

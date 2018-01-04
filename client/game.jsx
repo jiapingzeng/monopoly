@@ -108,7 +108,7 @@ export default class Game extends React.Component {
             )
         }
         const chatStyle = {
-            width: `${400}px`,
+            width: `${350}px`,
             height: `${window.innerHeight * 0.8}px`,
             position: 'fixed',
             right: 0,
@@ -118,6 +118,7 @@ export default class Game extends React.Component {
             <div className='game'>
                 <h1>MONOPOLY</h1>
                 <div>
+                    <div>{stats}</div>
                     <div style={chatStyle}>
                         <h1>Lobby</h1>
                         <form onSubmit={(e) => this.handleSubmit(e)}>
@@ -128,8 +129,7 @@ export default class Game extends React.Component {
                         <Chat messages={messages} />
                         <div>{lobby}</div>
                     </div>
-                    <div>{board}</div>
-                    <div>{stats}</div>
+                    <div>{board}</div>                    
                 </div>
             </div>
         )
